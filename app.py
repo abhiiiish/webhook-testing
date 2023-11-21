@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/index.html')
 def index():
     return render_template('index.html')
 
@@ -30,13 +30,26 @@ def generate_content():
         # Save the generated content (You may want to save it to a database)
         save_generated_content(json_response)
 
-        return render_template('result.html', generated_content=json_response)
+        return json_response
     else:
         error_message = "Error occurred - {}".format(response.text)
         return render_template('error.html', error_message=error_message)
 
 
+@app.route('/result.html', methods=['GET'])
+def get_webhook_data():
+
+    get_Data = generate_content()
+
+    url = get_Data.get('url')
+
+
+
+    return render_template('resul.html', image = url)
+
+
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True)
 
