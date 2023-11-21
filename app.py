@@ -36,7 +36,7 @@ def generate_content():
         return render_template('error.html', error_message=error_message)
 
 
-@app.route('/result.html', methods=['GET','POST])
+@app.route('/result.html', methods=['GET','POST'])
 def get_webhook_data():
 
     get_Data = generate_content()
