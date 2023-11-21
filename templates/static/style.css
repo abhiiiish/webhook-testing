@@ -1,0 +1,10 @@
+body {
+    padding-top: 56px; /* Adjusted for the fixed navbar */
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+    body {
+        padding-top: 70px; /* Adjusted for the fixed navbar */
+    }
+}
