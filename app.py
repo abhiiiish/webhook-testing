@@ -25,6 +25,14 @@ def generate_content():
     
     return json_response
 
+def show():
+    data = request.get_json()
+
+    caption = data.get("caption")[0].get("caption"),
+    generated_media = data.get("generated_media")[0].get("url")
+    
+    return jsonify(caption = caption, image = generated_media)
+
 
 
 if __name__ == '__main__':
