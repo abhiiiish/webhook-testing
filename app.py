@@ -21,12 +21,9 @@ def generate_content():
     headers = {"Authorization": "VpHFDiBO9sIB7q4KRrtdiABJAxJgBAcm"}
 
     response = requests.post(predis_ai_url, data=payload, headers=headers)
-
-        json_response = response.json()
-        post_id = json_response.get("post_id")
-        post_status = json_response.get("status")
-
-        return json_response
+    json_response = response.json()
+    
+    return json_response
 
 
 
