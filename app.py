@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/generate_content', methods=['POST'])
+@app.route(methods=['POST'])
 def generate_content():
     user_input = request.form.get('user_input')
 
@@ -36,13 +36,13 @@ def generate_content():
         return render_template('error.html', error_message=error_message)
 
 
-@app.route('/result.html', methods=['GET','POST'])
+@app.route('/result.html', methods=['GET'])
 def get_webhook_data():
 
     get_Data = generate_content()
     url = get_Data.get('url')
 
-    return render_template('result.html', image = url)
+    return render_template('result.html', image=url)
 
 
 
