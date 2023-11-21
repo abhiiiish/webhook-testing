@@ -41,7 +41,6 @@
         </nav>
     </navbar>
 
-
     <!-- Body Content -->
     <div class="container">
 
@@ -71,12 +70,30 @@
                         <pre>{{ json_response | safe }}</pre>
                     </div>
                 </section>
+
+            </div>
+
+            <div class="container">
+                <section class="my-5">
+                    <div class="container mt-5">
+
+                        <h2>
+                            Here are the generated response
+                        </h2>
+                        <span>
+                            <p>{{ capiton }}</p>
+                        </span>
+
+                        <span>
+                            <p><a>{{ image }}</a></p>
+                        </span>
+                    </div>
+
+                </section>
             </div>
         </section>
+
     </div>
-
-
-
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center mt-5 py-3 fixed-bottom">
