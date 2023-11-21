@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route(methods=['POST'])
+@app.route('/',methods=['POST'])
 def generate_content():
     user_input = request.form.get('user_input')
 
