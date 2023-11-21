@@ -36,16 +36,13 @@ def generate_content():
         return render_template('error.html', error_message=error_message)
 
 
-@app.route('/result.html', methods=['GET'])
+@app.route('/result.html', methods=['GET','POST])
 def get_webhook_data():
 
     get_Data = generate_content()
-
     url = get_Data.get('url')
 
-
-
-    return render_template('resul.html', image = url)
+    return render_template('result.html', image = url)
 
 
 
