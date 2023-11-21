@@ -49,7 +49,7 @@
             <div class="container mt-5">
 
                 <!-- User Input Form -->
-                <form method="POST" action="/generate_content">
+                <form method="POST" action="/index.html">
                     <div class="form-group">
                         <label for="user_input">Enter your Ideas:</label>
                         <textarea class="form-control" name="user_input" rows="4" cols="45"></textarea>
@@ -67,6 +67,7 @@
                 <section class="my-5">
                     <div class="container mt-5">
                         <h2>Generated Content:</h2>
+                        <p>{{ json_response }}</p>
                         <pre>{{ json_response | safe }}</pre>
                     </div>
                 </section>
