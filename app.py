@@ -26,7 +26,7 @@ def generate_content():
     return json_response
 
 def show():
-    data = request.get_json()
+    data = request.get_json(generate_content())
 
     caption = data.get("caption")[0].get("caption"),
     generated_media = data.get("generated_media")[0].get("url")
