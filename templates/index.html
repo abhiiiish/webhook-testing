@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Custom styles -->
-    <link rel="stylesheet" href="../static/main.css">
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 
 <body>
@@ -45,22 +45,11 @@
     <!-- Body Content -->
     <div class="container">
 
-        <section class="my-5">
-            <div>
-
-                <h1>Now use the Power of ai to generate the content</h1>
-
-
-            </div>
-        </section>
-
-
-        <section class="my-5">
+       <section class="my-5">
             <div class="container mt-5">
 
-
                 <!-- User Input Form -->
-                <form method="POST" action="/">
+                <form method="POST" action="/generate_content">
                     <div class="form-group">
                         <label for="user_input">Enter your Ideas:</label>
                         <textarea class="form-control" name="user_input" rows="4" cols="45"></textarea>
@@ -73,7 +62,18 @@
             </div>
         </section>
 
+        <section>
+            <div class="container">
+                <section class="my-5">
+                    <div class="container mt-5">
+                        <h2>Generated Content:</h2>
+                        <pre>{{ json_response | safe }}</pre>
+                    </div>
+                </section>
+            </div>
+        </section>
     </div>
+
 
 
 
