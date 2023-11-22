@@ -3,13 +3,11 @@ import requests
 
 app = Flask(__name__)
 
-# Configured webhook URL
-webhook_url = "https://webhook-test-f8cd.onrender.com/index.html"
-
 @app.route('/')
 def index():
     return render_template('index.html')
-
+    
+@app.route('/', methods=['POST'])
 def generate_content(user_input):
     predis_ai_url = "https://brain.predis.ai/predis_api/v1/create_content/"
     payload = {
@@ -29,7 +27,7 @@ def display():
     result = generate_content(user_input)
 
     if result.status_code == 200:
-        data = result.json()
+        data = response.json()
         caption = data.get("caption")[0].get("caption")
         generated_media = data.get("generated_media")[0].get("url")
 
