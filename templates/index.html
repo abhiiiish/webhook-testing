@@ -46,7 +46,7 @@
          <!-- User Input Form -->
         <section class="my-5">
             <div class="container mt-5">               
-                <form method="POST" action="{{ url_for('generate_content') }}">
+                <form method="POST" action="{{ url_for('display') }}">
                     <div class="form-group">
                         <label for="user_input">Enter your Ideas:</label>
                         <textarea class="form-control" name="user_input" rows="4" cols="45"></textarea>
@@ -64,10 +64,10 @@
                 <div class="container mt-5">
                     <h2>Here are the saved response</h2>
                     <span>
-                        <p id="savedCaption"></p>
+                        <p {{ caption }}</p>
                     </span>
                     <span>
-                        <p><a id="savedImage" href=""></a></p>
+                        <p><a href="{{ image }}"> {{ image }}</a></p>
                     </span>
                 </div>
             </section>
