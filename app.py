@@ -42,7 +42,7 @@ def fetch_and_save_response():
 
     return response
 
-@app.route('/', methods=['POST'])
+@app.route('/index.html', methods=['POST'])
 def display():
     user_input = request.form.get('user_input')
     result = generate_content(user_input)
