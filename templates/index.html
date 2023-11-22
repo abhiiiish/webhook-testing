@@ -43,9 +43,9 @@
     <!-- Body Content -->
     <div class="container">
 
+         <!-- User Input Form -->
         <section class="my-5">
-            <div class="container mt-5">
-                <!-- User Input Form -->
+            <div class="container mt-5">               
                 <form method="POST" action="{{ url_for('generate_content') }}">
                     <div class="form-group">
                         <label for="user_input">Enter your Ideas:</label>
@@ -55,32 +55,25 @@
                 </form>
                 <span class="text-danger">{{ error_message }}</span>
             </div>
-
-
-            <!-- this the incmoming data from configured webhook url-->
         </section>
+
+
+        <!-- this the incmoming data from configured webhook url-->
         <div class="container">
             <section class="my-5">
                 <div class="container mt-5">
-                    <h2>
-                        Here are the generated response
-                    </h2>
+                    <h2>Here are the saved response</h2>
                     <span>
-                        <p>{{ caption }}</p>
+                        <p id="savedCaption"></p>
                     </span>
-
                     <span>
-                        <p><a href="{{ image }}">{{ image }}</a></p>
+                        <p><a id="savedImage" href=""></a></p>
                     </span>
-
                 </div>
-
+            </section>
         </div>
+    </div>
 
-        </section>
-    </div>
-    </section>
-    </div>
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center mt-5 py-3 fixed-bottom">
