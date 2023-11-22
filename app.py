@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
     
-@app.route('/', methods=['POST'])
+
 def generate_content(user_input):
     predis_ai_url = "https://brain.predis.ai/predis_api/v1/create_content/"
     payload = {
@@ -24,9 +24,9 @@ def generate_content(user_input):
 @app.route('/index.html', methods=['POST'])
 def display():
     user_input = request.form.get('user_input')
-    result = generate_content(user_input)
+    response = generate_content(user_input)
 
-    if result.status_code == 200:
+    if response.status_code == 200:
         data = response.json()
         caption = data.get("caption")[0].get("caption")
         generated_media = data.get("generated_media")[0].get("url")
