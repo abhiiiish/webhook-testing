@@ -7,20 +7,26 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/index', methods=['POST'])   
-def generate_content(user_input):
-    predis_ai_url = "https://brain.predis.ai/predis_api/v1/create_content/"
-    payload = {
-        "brand_id": "64a534aab378eaae3f312b25",
-        "text": user_input,
-        "media_type": "video",
-        "video_duration": "long",
-    }
-    headers = {"Authorization": "VpHFDiBO9sIB7q4KRrtdiABJAxJgBAcm"}
+@app.route('/index', methods=['POST'])
+def generate_content():
+    try:
+        user_input = request.form.get('user_input', '')  # Get user_input from the form
 
-    response = requests.post(predis_ai_url, data=payload, headers=headers)
+        predis_ai_url = "https://brain.predis.ai/predis_api/v1/create_content/"
+        payload = {
+            "brand_id": "64a534aab378eaae3f312b25",
+            "text": user_input,
+            "media_type": "video",
+            "video_duration": "long",
+        }
+        headers = {"Authorization": "VpHFDiBO9sIB7q4KRrtdiABJAxJgBAcm"}
 
-    return response
+        response = requests.post(predis_ai_url, data=payload, headers=headers)
+
+        return response.text  # Return the response from the Predis AI API
+    except Exception as e:
+        print('Error generating content:', e)
+        return 'Internal Server Error', 500
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -40,8 +46,5 @@ def webhook():
         print('Error processing webhook:', e)
         return 'Internal Server Error', 500
 
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-
