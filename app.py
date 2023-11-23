@@ -42,7 +42,7 @@ def webhook():
         # Example: Send a response to the webhook URL
         # response = requests.post('https://webhook-test-f8cd.onrender.com/webhook', json={'message': 'Video URL received successfully'})
 
-        return jsonify( text = caption, url = media_url ) 
+        return jsonify( caption = caption, generated_media = media_url ) 
         
     except Exception as e:
         print('Error processing webhook:', e)
