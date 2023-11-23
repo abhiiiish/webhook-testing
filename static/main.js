@@ -4,7 +4,7 @@
         // Make an AJAX request to Flask backend
         $.ajax({
             type: 'POST',
-            url: '/index',
+            url: '/index.html',
             data: {user_input: userInput},
             success: function(response) {
                 // Parse the JSON response
