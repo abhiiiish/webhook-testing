@@ -1,13 +1,19 @@
-// nav bar toggle button
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
+function generateContent() {
+    var userInput = document.getElementById('userInput').value;
 
-// // Fetch the saved data from the server when the page loads
-// $(document).ready(function () {
-//     $.get("/display", function (data) {
-//         // Update the content with saved data
-//         $("#savedCaption").text(data.caption);
-//         $("#savedImage").attr("href", data.image).text(data.image);
-//     });
-// });
+    // Make an AJAX request to Flask backend
+    $.ajax({
+        type: 'POST',
+        url: '/index',
+        data: { user_input: userInput },
+        success: function (response) {
+            // Update the response text
+            document.getElementById('responseText').innerText = response;
+            // Show the response div
+            document.getElementById('responseDiv').style.display = 'block';
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+}
