@@ -32,7 +32,7 @@ def generate_content():
 def webhook():
     try:
         data = request.get_json()
-        video_url = data.get('videoUrl', '')  
+        video_url = data.post('videoUrl', '')  
         # Assuming 'videoUrl' is present in the request JSON
 
         # Process the video URL as needed
