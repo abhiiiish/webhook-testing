@@ -32,16 +32,18 @@ def generate_content():
 def webhook():
     try:
         data = request.get_json()
-        video_url = data.post('videoUrl', '')  
+         caption = data.get('caption')[0]['caption']
+         media_url = data.get('generated_media')[0]['url']
+        
+        # video_url = data.post('videoUrl', '')  
         # Assuming 'videoUrl' is present in the request JSON
-
         # Process the video URL as needed
-        print('Received video URL:', video_url)
-
+        # print('Received video URL:', video_url)
         # Example: Send a response to the webhook URL
-        response = requests.post('https://webhook-test-f8cd.onrender.com/webhook', json={'message': 'Video URL received successfully'})
+        # response = requests.post('https://webhook-test-f8cd.onrender.com/webhook', json={'message': 'Video URL received successfully'})
 
-        return 'OK', 200
+        return jsonify( text = caption, url = media_url ) 
+        
     except Exception as e:
         print('Error processing webhook:', e)
         return 'Internal Server Error', 500
