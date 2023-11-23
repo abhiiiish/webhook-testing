@@ -4,90 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content Generator</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- Custom styles -->
-    <link rel="stylesheet" href="../static/style.css">
+    <title>Socify</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
-
 <body>
-    <!-- Navigation Bar -->
-    <navbar>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-            <a class="navbar-brand" href="">
-                <img src="../static/images/logo-2.png" class="img-circle" alt="Cinque Terre" width="50" height="50">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <div class="container mt-5">
+        <h1 class="mb-4">Socify</h1>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
+        <form id="contentForm" method="POST" action="/index">
+            <div class="form-group">
+                <label for="userInput">Enter your ideas :</label>
+                <textarea class="form-control" id="userInput" rows="3" required></textarea>
             </div>
-        </nav>
-    </navbar>
 
+            <button type="button" class="btn btn-primary" onclick="generateContent()">Generate Content</button>
+        </form>
 
-    <!-- Body Content -->
-    <div class="container">
-
-         <!-- User Input Form -->
-        <section class="my-5">
-            <div class="container mt-5">               
-                <form method="POST" action="{{ url_for('display') }}">
-                    <div class="form-group">
-                        <label for="user_input">Enter your Ideas:</label>
-                        <textarea class="form-control" name="user_input" rows="4" cols="45"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Generate Content</button>
-                </form>
-                <span class="text-danger">{{ error_message }}</span>
-            </div>
-        </section>
-
-
-        <!-- this the incmoming data from configured webhook url-->
-        <div class="container">
-            <section class="my-5">
-                <div class="container mt-5">
-                    <h2>Here are the saved response</h2>
-                    <span>
-                        <p {{ caption }}</p>
-                    </span>
-                    <span>
-                        <p><a href="{{ image }}"> {{ image }}</a></p>
-                    </span>
-                </div>
-            </section>
+        <div class="mt-4" id="responseDiv" style="display: none;">
+            <h4>Here is your content:</h4>
+            <p id="responseText"></p>
         </div>
+
     </div>
 
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center mt-5 py-3 fixed-bottom">
-        <p>&copy; 2023 Socify</p>
-    </footer>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <!-- Custom JS for toggling navigation on smaller screens -->
     <script src="../static/main.js"></script>
 
 </body>
-
 </html>
