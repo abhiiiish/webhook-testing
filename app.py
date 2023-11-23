@@ -32,8 +32,8 @@ def generate_content():
 def webhook():
     try:
         data = request.get_json()
-         caption = data.get('caption')[0]['caption']
-         media_url = data.get('generated_media')[0]['url']
+        caption = data.get('caption')[0]['caption']
+        media_url = data.get('generated_media')[0]['url']
         
         # video_url = data.post('videoUrl', '')  
         # Assuming 'videoUrl' is present in the request JSON
