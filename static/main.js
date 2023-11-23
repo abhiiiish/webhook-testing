@@ -11,8 +11,8 @@
                 var responseData = JSON.parse(response);
 
                 // Update the response text and media URL
-                document.getElementById('responseText').innerText = 'Caption: ' + responseData.text;
-                document.getElementById('mediaUrl').innerText = 'Media URL: ' + responseData.url;
+                document.getElementById('caption').innerText = 'Caption: ' + responseData.text;
+                document.getElementById('generated_media').innerText = 'Media URL: ' + responseData.url;
 
                 // Show the response div
                 document.getElementById('responseDiv').style.display = 'block';
