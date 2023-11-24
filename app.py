@@ -28,7 +28,7 @@ def generate_content():
     except Exception as e:
         abort(500)
 
-# @app.route('/webhook', methods=['POST'])
+
 def result():
     if request.method == 'POST':
         data = request.json()
@@ -38,7 +38,7 @@ def result():
     else :
         abort(400)
 
-    # return render_template('index.html')
+
 
 
 if __name__ == '__main__':
