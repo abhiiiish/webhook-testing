@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify, abort
-import requests
 
 app = Flask(__name__)
 
@@ -32,12 +31,11 @@ def generate_content():
 def result():
     if request.method == 'POST':
         data = request.json()
-        return ( "received data :", data)
+        print("Received data:", data)  # Print data to the console
 
-        return 'success', 200
-    else :
+        return jsonify({'status': 'success'}), 200
+    else:
         abort(400)
-    return render_template('webhook.html', data)
 
 if __name__ == '__main__':
     app.run(debug=True)
