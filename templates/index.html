@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Flask App</title>
+    <title>Socify</title>
     <!-- Include Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 </head>
+
 <body>
 
-<div class="container mt-5">
-    <h1 class="mb-4">Flask App</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Socify</h1>
 
-    <form id="contentForm">
-        <div class="form-group">
-            <label for="userInput">Enter Text:</label>
-            <textarea class="form-control" id="userInput" name="user_input" rows="3" required></textarea>
+        <form id="contentForm" method="POST" action="/webhook">
+            <div class="form-group">
+                <label for="userInput">Enter your ideas :</label>
+                <textarea class="form-control" id="userInput" rows="3" required></textarea>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="generateContent()">Generate Content</button>
+        </form>
+
+        <div class="mt-4" id="responseDiv" style="display: none;">
+            <h3>Generated response</h3>
+            <p> {{  text }}</p>
+
+            <h4>Here is your content:</h4>
+            <p id="responseText"></p>
         </div>
 
-        <button type="button" class="btn btn-primary" onclick="generateContent()">Generate Content</button>
-    </form>
-
-    <div class="mt-4" id="responseDiv" style="display: none;">
-        <h4>Response:</h4>
-        <p id="caption"></p>
-        <p id="generated_media"></p>
     </div>
-</div>
 
-<!-- Include Bootstrap JS and jQuery -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-<script src="../static/main.js"></script>
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="../static/main.js"></script>
 
 </body>
+
 </html>
+
+
+
