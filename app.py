@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/index.html', methods=['POST'])
 def generate_content():
     try:
         user_input = request.form.get('user_input', '')  # Get user_input from the form
@@ -28,7 +28,7 @@ def generate_content():
     except Exception as e:
         abort(500)
 
-
+@app.route('/webhook', methods=['POST'])
 def result():
     if request.method == 'POST':
         data = request.json()
@@ -37,9 +37,7 @@ def result():
         return 'success', 200
     else :
         abort(400)
-
-
-
+    return render_template('webhook.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
