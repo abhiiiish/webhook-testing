@@ -28,16 +28,16 @@ def generate_content():
     except Exception as e:
         abort(500)
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook.html', methods=['POST'])
 def result():
     if request.method == 'POST':
         data = request.json()
-        print( "received data :", data)
+        return ( "received data :", data)
 
         return 'success', 200
     else :
         abort(400)
-    return render_template('webhook.html')
+    return render_template('webhook.html', data)
 
 if __name__ == '__main__':
     app.run(debug=True)
