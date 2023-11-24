@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, abort
 import requests
 
 app = Flask(__name__)
@@ -7,46 +7,30 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/index.html', methods=['POST'])
+@app.route('/index', methods=['POST'])
 def generate_content():
     try:
         user_input = request.form.get('user_input', '')  # Get user_input from the form
-
         predis_ai_url = "https://brain.predis.ai/predis_api/v1/create_content/"
         payload = {
-            "brand_id": "64a534aab378eaae3f312b25",
+            "brand_id": "655b548ce8c5caef9d9455b6",
             "text": user_input,
             "media_type": "video",
             "video_duration": "long",
         }
-        headers = {"Authorization": "VpHFDiBO9sIB7q4KRrtdiABJAxJgBAcm"}
-
+        headers = {"Authorization": "RmntK5qqhRFlg6mcUDmLg4xArPINE6fv"}
         response = requests.post(predis_ai_url, data=payload, headers=headers)
-
-        return response.text  # Return the response from the Predis AI API
-    except Exception as e:
-        print('Error generating content:', e)
-        return 'Internal Server Error', 500
-
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    try:
-        data = request.get_json()
-        caption = data.get('caption')[0]['caption']
-        media_url = data.get('generated_media')[0]['url']
-        
-        # video_url = data.post('videoUrl', '')  
-        # Assuming 'videoUrl' is present in the request JSON
-        # Process the video URL as needed
-        # print('Received video URL:', video_url)
-        # Example: Send a response to the webhook URL
-        # response = requests.post('https://webhook-test-f8cd.onrender.com/webhook', json={'message': 'Video URL received successfully'})
-
-        return jsonify( caption = caption, generated_media = media_url ) 
+        return response.text 
         
     except Exception as e:
-        print('Error processing webhook:', e)
-        return 'Internal Server Error', 500
+        abort(500)
+
+def result():
+    if request.method == 'POST':
+        pritn( request.get_json())
+        return 'success', 200
+    else :
+        abort(400)
 
 if __name__ == '__main__':
     app.run(debug=True)
