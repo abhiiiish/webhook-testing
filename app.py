@@ -20,9 +20,8 @@ def generate_content():
             "video_duration": "long",
         }
         headers = {"Authorization": "RmntK5qqhRFlg6mcUDmLg4xArPINE6fv"}
-
         response = requests.post(predis_ai_url, data=payload, headers=headers)
-    
+        
         return response.text 
     
 
@@ -32,7 +31,8 @@ def generate_content():
 # @app.route('/webhook', methods=['POST'])
 def result():
     if request.method == 'POST':
-        pritn( request.get_json())
+        data = request.json()
+        print( "received data :", data)
 
         return 'success', 200
     else :
