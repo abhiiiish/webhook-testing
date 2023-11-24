@@ -11,6 +11,7 @@ def index():
 def generate_content():
     try:
         user_input = request.form.get('user_input', '')  # Get user_input from the form
+
         predis_ai_url = "https://brain.predis.ai/predis_api/v1/create_content/"
         payload = {
             "brand_id": "655b548ce8c5caef9d9455b6",
@@ -19,18 +20,26 @@ def generate_content():
             "video_duration": "long",
         }
         headers = {"Authorization": "RmntK5qqhRFlg6mcUDmLg4xArPINE6fv"}
+
         response = requests.post(predis_ai_url, data=payload, headers=headers)
-        return response.text 
-        
+        text = response.text 
+        return jsonify(text = text)
+    
+
     except Exception as e:
         abort(500)
 
+# @app.route('/webhook', methods=['POST'])
 def result():
     if request.method == 'POST':
         pritn( request.get_json())
+
         return 'success', 200
     else :
         abort(400)
+
+    # return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
