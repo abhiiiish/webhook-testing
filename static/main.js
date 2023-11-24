@@ -4,7 +4,7 @@ function generateContent() {
     // Make an AJAX request to Flask backend
     $.ajax({
         type: 'POST',
-        url: 'https://socify-wofb.onrender.com',
+        url: 'https://socify-wofb.onrender.com/webhook',
         data: { user_input: userInput },
         success: function (response) {
             // Update the response text
