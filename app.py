@@ -27,7 +27,6 @@ def generate_content():
     except Exception as e:
         abort(500)
 
-@app.route('/', methods=['POST'])
 def result():
     if request.method == 'POST':
         data = request.json()
