@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/index', methods=['POST'])
+@app.route('/webhook', methods=['POST'])
 def generate_content():
     try:
         user_input = request.form.get('user_input', '')  # Get user_input from the form
