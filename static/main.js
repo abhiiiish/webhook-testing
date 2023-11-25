@@ -20,27 +20,37 @@ function generateContent() {
 
 const webhook = "https://socify-wofb.onrender.com/webhook";
 
-function fetchWebhook() {
-    fetch(webhook, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(response => {
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                throw new Error('Failed to fetch data');
+function fetchWebhookWithXHR() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', webhook, true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            try {
+                var data = JSON.parse(xhr.responseText);
+                updateWebPage(data);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
             }
-        })
-        .then(data => {
-            // Update the webpage with the fetched data
-            updateWebPage(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        } else {
+            console.error('Request failed with status:', xhr.status);
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error('Network error occurred');
+    };
+
+    xhr.send();
 }
+
+function updateWebPage(data) {
+    // Assuming you have an element with id 'webhookData' to display the data
+    const webhookDataElement = document.getElementById('webhookData');
+
+    // Update the content of the element with the fetched data
+    webhookDataElement.innerText = JSON.stringify(data, null, 2);
+}
+
 
 
