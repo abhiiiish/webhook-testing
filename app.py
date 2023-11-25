@@ -22,7 +22,8 @@ def generate_content():
         headers = {"Authorization": "ObzQ8v2MtY13bSB4vOGUa87kovoGYWDc"}
 
         response = requests.post(predis_ai_url, data=payload, headers=headers)
-        return jsonify(response.text )
+        responseText = response.text
+        return jsonify(responseText )
     
     except Exception as e:
         abort(500)
