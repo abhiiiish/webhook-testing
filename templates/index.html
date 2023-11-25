@@ -28,10 +28,10 @@
 
         <div class="mt-4" id="responseDiv" style="display: none;">
             <h3>Generated response</h3>
-            <p> {{  response.text }}</p>
+            <p  id="responseText"> </p>
+
 
             <button type="button" class="btn btn-primary" onclick="fetchWebhook()">fetch</button>
-
             <h4>Here is your content:</h4>
             <!-- Add this somewhere in your HTML body -->
             <div id="webhookData"></div>
