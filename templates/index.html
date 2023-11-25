@@ -17,7 +17,7 @@
     <div class="container mt-5">
         <h1 class="mb-4">Socify</h1>
 
-        <form id="contentForm" method="POST" action="/index">
+        <form id="contentForm" method="POST" action="/webhook">
             <div class="form-group">
                 <label for="userInput">Enter your ideas :</label>
                 <textarea class="form-control" id="userInput" rows="3" required></textarea>
@@ -28,10 +28,14 @@
 
         <div class="mt-4" id="responseDiv" style="display: none;">
             <h3>Generated response</h3>
-            <p>{{ response.text }} </p>
+            <p> {{  text }}</p>
+
+            <button type="button" class="btn btn-primary" onclick="fetchWebhook()">fetch</button>
 
             <h4>Here is your content:</h4>
-            <p id="responseText"></p>
+            <!-- Add this somewhere in your HTML body -->
+            <div id="webhookData"></div>
+
         </div>
 
     </div>
@@ -44,6 +48,5 @@
 </body>
 
 </html>
-
 
 
