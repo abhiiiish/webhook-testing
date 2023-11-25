@@ -17,12 +17,19 @@ function generateContent() {
         }
     });
 }
-
 const webhook = "https://socify-wofb.onrender.com/webhook";
 
 function fetchWebhookWithXHR() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', webhook, true);
+    xhr.open('POST', webhook, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    // // Example data to send in the POST request
+    // var postData = JSON.stringify({
+    //     key1: 'value1',
+    //     key2: 'value2'
+    //     // Add your data properties here
+    // });
 
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -41,7 +48,7 @@ function fetchWebhookWithXHR() {
         console.error('Network error occurred');
     };
 
-    xhr.send();
+    xhr.send(postData);
 }
 
 function updateWebPage(data) {
@@ -51,6 +58,5 @@ function updateWebPage(data) {
     // Update the content of the element with the fetched data
     webhookDataElement.innerText = JSON.stringify(data, null, 2);
 }
-
 
 
