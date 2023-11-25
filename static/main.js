@@ -18,11 +18,15 @@ function generateContent() {
     });
 }
 
-
 const webhook = "https://socify-wofb.onrender.com/webhook";
 
 function fetchWebhook() {
-    fetch(webhook)
+    fetch(webhook, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
         .then(response => {
             if (response.status === 200) {
                 return response.json();
@@ -39,12 +43,4 @@ function fetchWebhook() {
         });
 }
 
-function updateWebPage(data) {
-    // Assuming you have an element with id 'webhookData' to display the data
-    const webhookDataElement = document.getElementById('webhookData');
 
-    // Update the content of the element with the fetched data
-    webhookDataElement.innerText = JSON.stringify(data, null, 2);
-}
-
-// Call the fetchWebhook function when the page loads or when needed
