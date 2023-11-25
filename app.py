@@ -22,20 +22,20 @@ def generate_content():
         headers = {"Authorization": "ObzQ8v2MtY13bSB4vOGUa87kovoGYWDc"}
 
         response = requests.post(predis_ai_url, data=payload, headers=headers)
-        responseText = response.text
-        return jsonify(responseText )
-    
+
+        return response.text
+
     except Exception as e:
         abort(500)
 
 def result():
     if request.method == 'POST':
-        pritn( request.get_json())
+        pritn( request.json())
 
         return 'success', 200
     else :
         abort(400)
 
+
 if __name__ == '__main__':
     app.run(debug=True)
-
