@@ -4,7 +4,7 @@ function generateContent() {
     // Make an AJAX request to Flask backend
     $.ajax({
         type: 'POST',
-        url: 'https://socify-wofb.onrender.com/webhook',
+        url: 'https://socify-wofb.onrender.com/index.html',
         data: { user_input: userInput },
         success: function (response) {
             // Update the response text
@@ -17,46 +17,4 @@ function generateContent() {
         }
     });
 }
-const webhook = "https://socify-wofb.onrender.com/webhook";
-
-function fetchWebhookWithXHR() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', webhook, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-
-    // // Example data to send in the POST request
-    // var postData = JSON.stringify({
-    //     key1: 'value1',
-    //     key2: 'value2'
-    //     // Add your data properties here
-    // });
-
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            try {
-                var data = JSON.parse(xhr.responseText);
-                updateWebPage(data);
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-            }
-        } else {
-            console.error('Request failed with status:', xhr.status);
-        }
-    };
-
-    xhr.onerror = function () {
-        console.error('Network error occurred');
-    };
-
-    xhr.send(postData);
-}
-
-function updateWebPage(data) {
-    // Assuming you have an element with id 'webhookData' to display the data
-    const webhookDataElement = document.getElementById('webhookData');
-
-    // Update the content of the element with the fetched data
-    webhookDataElement.innerText = JSON.stringify(data, null, 2);
-}
-
 
