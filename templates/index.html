@@ -17,7 +17,7 @@
     <div class="container mt-5">
         <h1 class="mb-4">Socify</h1>
 
-        <form id="contentForm" method="POST" action="/webhook">
+        <form id="contentForm" method="POST" action="/index.html">
             <div class="form-group">
                 <label for="userInput">Enter your ideas :</label>
                 <textarea class="form-control" id="userInput" rows="3" required></textarea>
@@ -26,16 +26,39 @@
             <button type="button" class="btn btn-primary" onclick="generateContent()">Generate Content</button>
         </form>
 
-        <div class="mt-4" id="responseDiv" style="display: none;">
+        <div class="mt-4" id="responseDiv">
             <h3>Generated response</h3>
-            <p  id="responseText"> </p>
-
-
-            <button type="button" class="btn btn-primary" onclick="fetchWebhookWithXHR()">fetch</button>
+            <p> {{ text }}</p>
+        
             <h4>Here is your content:</h4>
-            <!-- Add this somewhere in your HTML body -->
-            <div id="webhookData"></div>
-
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Brand ID</th>
+                        <th>Post ID</th>
+                        <th>Caption</th>
+                        <th>Status</th>
+                        <th>Media URL</th>
+                        <th>Media Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profile in profiles %}
+                        <tr>
+                            <td>{{ profile.id }}</td>
+                            <td>{{ profile.brand_id }}</td>
+                            <td>{{ profile.post_id }}</td>
+                            <td>{{ profile.caption }}</td>
+                            <td>{{ profile.status }}</td>
+                            <td>{{ profile.media_url }}</td>
+                            <td>{{ profile.media_type }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
         </div>
 
     </div>
@@ -48,5 +71,6 @@
 </body>
 
 </html>
+
 
 
