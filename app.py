@@ -33,7 +33,7 @@ def get_db_data():
     profiles = Profile.query.all()
     return jsonify({'profiles': profiles})
 
-@app.route('/index', methods=['POST'])
+@app.route('/generate', methods=['POST'])
 def generate_content():
     user_input = request.form.get('user_input')
 
@@ -49,7 +49,7 @@ def generate_content():
 
     return jsonify(text = response.text)
 
-@app.route('/db', methods=['POST'])
+@app.route('/index', methods=['POST'])
 def webhook_data():
     data = request.json
 
