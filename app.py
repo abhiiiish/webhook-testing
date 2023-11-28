@@ -35,7 +35,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/generate_content', methods=['POST'])
+@app.route('/index.html', methods=['POST'])
 def generate_content():
     user_input = request.form.get('user_input')
 
@@ -54,9 +54,8 @@ def generate_content():
     return jsonify({'text': response.json, 'profiles': profiles})
 
 
-
 # Add a route to receive the webhook data
-@app.route('/index.html', methods=['POST'])
+@app.route('/', methods=['POST'])
 def webhook_data():
     data = request.json
 
