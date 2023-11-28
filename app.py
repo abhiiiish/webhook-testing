@@ -4,16 +4,14 @@ from flask_migrate import Migrate, migrate
 import json
 
 app = Flask(__name__)
-app.debug = True
+CORS(app)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
 
-# Set up application context
 with app.app_context():
-    # Create tables in the database
     db.create_all()
 
 class Profile(db.Model):
@@ -29,37 +27,30 @@ class Profile(db.Model):
         return f"Profile(id={self.id}, brand_id={self.brand_id}, post_id={self.post_id}, caption={self.caption[:50]}, status={self.status}, media_url={self.media_url}, media_type={self.media_type})"
 
 
-
-# Initialize the migration
 migrate = Migrate(app, db)
 
-
-# Add a route to display the profiles
 @app.route('/')
 def index():
-    # Display profiles from the database
-    profiles = Profile.query.all()
-    return render_template('index.html', profiles=profiles)
+    return render_template('index.html')
 
 
-@app.route('/send', methods=['POST'])
+@app.route('/generate_content', methods=['POST'])
 def generate_content():
-    
     user_input = request.form.get('user_input')
 
     url = "https://brain.predis.ai/predis_api/v1/create_content/"
-
     payload = {
-      "brand_id": "64e86b35de4590305093c2b3",
-      "text": "3 tips for a healthy morning breakfast",
-      "media_type": "single_image",
-      "color_palette_type": "ai_suggested"
-  
+        "brand_id": "64e86b35de4590305093c2b3",
+        "text": "3 tips for a healthy morning breakfast",
+        "media_type": "single_image",
+        "color_palette_type": "ai_suggested"
     }
     headers = {"Authorization": "ayUWiVk7cLb8UR6aWNrDzeh5k41tU3cF"}
-    response = requests.request("POST", url, data=payload, headers=headers)
-    return jsonify(response.json)
+    response = requests.post(url, data=payload, headers=headers)
 
+    profiles = Profile.query.all()
+
+    return jsonify({'text': response.json, 'profiles': profiles})
 
 
 
@@ -83,9 +74,8 @@ def webhook_data():
     return jsonify({"message": "Webhook data received and saved successfully"})
 
 
-
 if __name__ == '__main__':
-    app.run()
+    app.run(Debug=True)
 
 app.app_context().push()
 
