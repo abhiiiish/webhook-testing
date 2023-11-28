@@ -5,7 +5,8 @@ function generateContent() {
     $.ajax({
         type: 'POST',
         url: 'https://socify-wofb.onrender.com/index',
-        data: { user_input: userInput },
+        contentType: 'application/json',  // Set the Content-Type header
+        data: JSON.stringify({ user_input: userInput }),  // Convert data to JSON string
         success: function (jsonResponse) {
             // Update the response text
             document.getElementById('responseText').innerText = jsonResponse.text;
