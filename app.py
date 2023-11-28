@@ -48,7 +48,7 @@ def generate_content():
 
     return jsonify({'text': response.json})
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/index/webhook', methods=['POST'])
 def webhook_data():
     data = request.json
 
