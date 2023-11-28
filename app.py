@@ -39,12 +39,12 @@ def generate_content():
 
     url = "https://brain.predis.ai/predis_api/v1/create_content/"
     payload = {
-        "brand_id": "64e86b35de4590305093c2b3",
+        "brand_id": "6565ca2b619b4dc27c6b5474",
         "text": user_input,  # Use user input here
         "media_type": "video",
         "video_duration": "long",
     }
-    headers = {"Authorization": "ayUWiVk7cLb8UR6aWNrDzeh5k41tU3cF"}
+    headers = {"Authorization": "kTSNVjEevr4hlpqYOqIHmBh5cXTGmTJX"}
     response = requests.post(url, data=payload, headers=headers)
 
     return jsonify(text = response.text)
