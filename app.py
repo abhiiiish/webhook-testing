@@ -40,13 +40,13 @@ def generate_content():
     payload = {
         "brand_id": "64e86b35de4590305093c2b3",
         "text": user_input,  # Use user input here
-        "media_type": "single_image",
-        "color_palette_type": "ai_suggested"
+        "media_type": "video",
+        "video_duration": "long",
     }
     headers = {"Authorization": "ayUWiVk7cLb8UR6aWNrDzeh5k41tU3cF"}
     response = requests.post(url, data=payload, headers=headers)
 
-    return jsonify({'text': response.json})
+    return jsonify(text = response.text)
 
 @app.route('/index/webhook', methods=['POST'])
 def webhook_data():
