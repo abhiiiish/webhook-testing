@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, abort
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate, migrate
-import json
+from flask_migrate import Migrate
+import json, requests
 
 app = Flask(__name__)
 CORS(app)
