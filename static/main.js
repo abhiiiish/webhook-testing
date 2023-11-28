@@ -5,7 +5,7 @@ function generateContent() {
     // Make an AJAX request to Flask backend
     $.ajax({
         type: 'POST',
-        url: 'https://socify-wofb.onrender.com/index',
+        url: 'https://socify-wofb.onrender.com/generate',
         contentType: 'application/json',  // Set the Content-Type header
         data: JSON.stringify({ user_input: userInput }),  // Convert data to JSON string
         success: function (jsonResponse) {
@@ -26,7 +26,7 @@ function fetchProfiles() {
     // Make an AJAX request to fetch profiles from the backend
     $.ajax({
         type: 'POST',
-        url: '/db',
+        url: '/index',
         success: function (data) {
             // Clear existing table rows
             var tableBody = document.getElementById('profilesTableBody');
