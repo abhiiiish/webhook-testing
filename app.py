@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import requests
+import requests, json
 
 app = Flask(__name__)
 CORS(app)
@@ -10,6 +10,7 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,7 +28,7 @@ class Profile(db.Model):
 def index():
     return render_template('index.html')
 
-@app.route('/db', methods=['POST'])
+@app.route('/', methods=['POST'])
 def get_db_data():
     profiles = Profile.query.all()
     return jsonify({'profiles': profiles})
@@ -48,7 +49,7 @@ def generate_content():
 
     return jsonify(text = response.text)
 
-
+@app.route('/db', methods=['POST'])
 def webhook_data():
     data = request.json
 
