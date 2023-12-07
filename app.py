@@ -4,7 +4,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/show', methods=['POST'])
+@app.route('/show', methods=['GET','POST'])
 def request_post():
     
     url = "https://brain.predis.ai/predis_api/v1/create_content/"
