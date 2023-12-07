@@ -29,7 +29,7 @@ def request_post():
     else:
         print("Error occurred - {}".format(response.text))
 
-    return jsonify(json_response)
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(debug=True)
