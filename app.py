@@ -28,7 +28,7 @@ def request_post():
     else:
         print("Error occurred - {}".format(response.text))
 
-    return jsonify(response)
+    return jsonify(json_response)
 
 
 
