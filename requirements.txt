@@ -1,7 +1,5 @@
 Flask
 requests
 flask-cors
-flask-sqlalchemy
-Flask-Migrate
 gunicorn
 Werkzeug
