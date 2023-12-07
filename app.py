@@ -24,13 +24,11 @@ def request_post():
     
     if response.status_code == 200:
         json_response = response.json()
-        # post_id = response.get("post_id")
-        # post_status = response.get("status")
     
     else:
         print("Error occurred - {}".format(response.text))
 
-    return jsonify(json_response)
+    return jsonify(response)
 
 
 
