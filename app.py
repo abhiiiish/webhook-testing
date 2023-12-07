@@ -1,71 +1,36 @@
 from flask import Flask, render_template, request, jsonify
-from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-import requests, json
+import requests
 
 app = Flask(__name__)
-CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
-
-class Profile(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    brand_id = db.Column(db.String(50), nullable=False)
-    post_id = db.Column(db.String(50), nullable=False)
-    caption = db.Column(db.String(500), nullable=False)
-    status = db.Column(db.String(20), nullable=False)
-    media_url = db.Column(db.String(200), nullable=True)
-    media_type = db.Column(db.String(20), nullable=True)
-
-    def __repr__(self):
-        return f"Profile(id={self.id}, brand_id={self.brand_id}, post_id={self.post_id}, caption={self.caption[:50]}, status={self.status}, media_url={self.media_url}, media_type={self.media_type})"
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/', methods=['POST'])
-def get_db_data():
-    profiles = Profile.query.all()
-    return jsonify({'profiles': profiles})
-
-@app.route('/generate', methods=['POST'])
-def generate_content():
-    user_input = request.form.get('user_input')
-
+@app.route('/show', methods=['GET','POST'])
+def request_post():
+    
     url = "https://brain.predis.ai/predis_api/v1/create_content/"
+    
     payload = {
-        "brand_id": "6565ca2b619b4dc27c6b5474",
-        "text": user_input,  # Use user input here
-        "media_type": "video",
-        "video_duration": "long",
+      "brand_id": "656890e90866e3d38a426d4f",
+      "text": "All our dreams can come true if we have the courage to pursue them",
+      "media_type": "single_image",
+      "author": "Walt Disney",  # optional
+      "template_ids": [],  # pass template_ids if you want quotes in specific design
+      "post_type": "quotes"
     }
-    headers = {"Authorization": "kTSNVjEevr4hlpqYOqIHmBh5cXTGmTJX"}
-    response = requests.post(url, data=payload, headers=headers)
+    
+    headers = {"Authorization": "k5esldhz7TkrK9rYqN69RbzifYTd9u2J"}
+    
+    response = requests.request("POST", url, data=payload, headers=headers)
+    
+    if response.status_code == 200:
+        json_response = response.json()
+        # post_id = response.get("post_id")
+        # post_status = response.get("status")
+    
+    else:
+        print("Error occurred - {}".format(response.text))
 
-    return jsonify(text = response.text)
-
-@app.route('/index', methods=['POST'])
-def webhook_data():
-    data = request.json
-
-    # Save data to the database
-    new_profile = Profile(
-        brand_id=data['brand_id'],
-        post_id=data['post_id'],
-        caption=data['caption'][0]['caption'],
-        status=data['status'],
-        media_url=data['generated_media'][0]['url'] if 'generated_media' in data else None,
-        media_type=data['media_type'] if 'media_type' in data else None
-    )
-    db.session.add(new_profile)
-    db.session.commit()
-
-    return jsonify({"message": "Webhook data received and saved successfully"})
+    return jsonify(json_response)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
